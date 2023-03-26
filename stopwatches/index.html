@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://unpkg.com/vue@3.0.0"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@100&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+      integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <style>
+      * {
+        padding: 0px;
+        margin: 0px;
+        box-sizing: border-box;
+        font-family: "Libre Franklin", sans-serif;
+        font-weight: 400;
+        font-size: 22px;
+        line-height: 21.05px;
+        align-self: center;
+      
+      }
+      html,
+      body {
+        height: auto;
+        min-height: 100vh;
+        width: 100vw;
+        background-color: #353638;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      #app {
+        height: 100%;
+        min-height: 100vh;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .active {
+        color: #fff;
+      }
+      .inactive {
+        color: #9e9e9e;
+      }
+      .activeLine {
+        background-color: #fff;
+      }
+      .inactiveLine {
+        background-color: #9e9e9e;
+      }
+     
+      .container {
+        display: flex;
+        align-items: center;
+        justify-content: start;
+        flex-wrap: wrap;
+        max-width: 80vw;
+        height: auto;
+        width: 100%;
+        gap: 30px;
+      }
+      .item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background-color: #696969;
+        width: 30%;
+        height: 120px;
+        font-family: "Gotham Pro";
+      }
+      .watch {
+        width: 100%;
+        height: 50%;
+      }
+      .numbers {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .btns {
+        display: flex;
+        justify-content: center;
+        gap: 30px;
+        align-items: center;
+      }
+      button {
+        background-color: transparent;
+        outline: none;
+      }
+      .line {
+        width: 100%;
+        height: 1px;
+      }
+      @media screen and (max-width: 768px) {
+        .item {
+          width: 40%;
+        }
+        .container {
+          justify-content: center;
+        }
+      }
+      @media screen and (max-width: 320px) {
+        .item {
+          width: 95%;
+          min-width: 225px;
+        }
+        .container {
+          justify-content: center;
+        }
+      }
+    </style>
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app">
+      <div class="container">
+        <div
+          v-for="(x, i) in stopwatch" class="item"
+          :class="[x.running ?  'active': 'inactive']"
+        >
+          <div class="watch numbers">
+            <p>
+              <span v-if="x.hours">{{x.hours}}:</span
+              ><span v-if="x.hours || x.minutes">{{x.minutes}}:</span>
+              <span>{{x.seconds}}</span>
+            </p>
+          </div>
+          <div class="line" :class="[x.running ?  'activeLine': 'inactiveLine']"></div>
+          <div class="watch btns">
+            <div v-if="!x.running" @click="run(i)"><i class="fa-solid fa-play"></i></div>
+            <div v-if="x.running" @click="run(i)"><i class="fa-solid fa-pause"></i></div>
+            <div @click="reset(i)"><i class="fa-solid fa-square"></i></button>
+          </div>
+        </div>
+      </div>
+      <div class="item inactive">
+        <div @click="addStopwatch()">
+          <i class="fa-solid fa-plus"></i>
+        </div>
+      </div>
+    </div>
+    <script src="app.js"></script>
+  </body>
+</html>
